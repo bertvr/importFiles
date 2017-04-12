@@ -1,41 +1,26 @@
 
 import json
 import jsonpickle
+import pyaml
 from Employee import Employee
 from Employee import Boss
 
 
-#def object lists
-employees = []
-employees.append(Employee("Maikel",5000))
-employees.append(Employee("Wouter",5000))
-employees.append(Employee("stijn", 1000))
-employees.append( Boss("Bert", 1000))
+# Open a file
+importFile = open("export.txt", "r")
+serialized = importFile.read()
+importFile.close()
 
 
-
-# s = json.dumps(employees.__dict__,default=Employee)
-# print(s)
-
-serialized = jsonpickle.encode(employees)
 print(serialized)
 
+employees = jsonpickle.decode(serialized)
 
-# Open a file
-exportFile = open("export.txt", "w")
-exportFile.write( serialized)
-exportFile.close()
+print(employees)
+employees[0].displayEmployee()
+employees[1].displayEmployee()
+employees[2].displayEmployee()
+employees[1].displayEmployeeHiddenAtribute()
+employees[1].displayCount()
 
 
-
-# f  = FileItem("/foo/bar")
-# magic(f)
-#
-# print ("Hello, Python!")
-#
-# class MyEncoder(JSONEncoder):
-#     def default(self, o):
-#         return o.__dict__
-#
-# MyEncoder().encode(f)
-#     '{"fname": "/foo/bar"}'
